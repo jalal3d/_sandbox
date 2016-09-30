@@ -1,4 +1,54 @@
 
+#renaming deformer set based from deformer name
+
+import maya.cmds as mc
+bends = mc.ls('*_bend', type='nonLinear')
+
+
+for bend in bends:
+
+
+    set = mc.listConnections('{0}.message'.format(bend), s=False, d=True, type='objectSet')
+
+    print mc.rename(set, '{0}_set'.format(bend))
+
+
+
+
+#Connect attr "paper_jnt.tweekerVis" to visibility of shape object
+import maya.cmds as mc
+oSel = mc.ls(selection = True)
+
+for obj in oSel:
+    objShape = mc.listRelatives(obj ,s=True ,ni=True)[0]
+    mc.connectAttr("paper_jnt.tweekerVis", "{0}.visibility".format(objShape))
+
+
+
+
+
+import maya.cmds as mc
+#within a variable, you can get an exactype from the list)
+oSel = mc.ls(selection = True, exactType='transform')
+transList = []
+
+for obj in oSel:
+    transList.append(obj)
+mc.select(transList)
+
+
+
+
+#from selection, select skinCluster and set skin method with dualquaternion
+meshList = cmds.ls(sl=True)
+for mesh in meshList:
+    skCl = mel.eval('findRelatedSkinCluster ' + mesh)
+    mc.setAttr('{0}.skinningMethod'.format(skCl), 1)
+    mc.setAttr('{0}.dqsSupportNonRigid'.format(skCl), 1)
+
+
+
+
 #From: Alicia Carvalho, Pierre Violanti, Felipe Sanges
 
 #get target from constrained object
@@ -389,7 +439,7 @@ for object in pivotList:
 
 import maya.mel as mel
 
-mesh = cmds.ls(sl=True)
+mesh = cmds.ls(sl=True)[0]
 skinClusterNode = mel.eval('findRelatedSkinCluster {0}'.format(mesh))
 jointList = cmds.skinCluster("body_hiShape_skClust", q=True, inf=True)
 
