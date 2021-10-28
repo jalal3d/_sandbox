@@ -1389,3 +1389,22 @@ for inf in oInfluence:
     print 'select("%s", add=True)' % inf
 
 #####################################################################################################
+
+#find the skincluster related to the mesh 
+meshList = cmds.ls(sl=True)
+for mesh in meshList:
+    skCl = mel.eval('findRelatedSkinCluster ' + mesh)
+    print(skCl)
+    cmds.select (skCl)
+    
+#find deformers related to the mesh
+meshList = cmds.ls(sl=True)
+for mesh in meshList:
+    deformers = mel.eval('findRelatedDeformer ' + mesh)
+    print(deformers)
+
+#itereate through the deformers and find and print the object type (type of deformer)
+for deformer_node in deformers:
+    deformer_type = cmds.objectType(deformer_node)
+    print(deformer_node, deformer_type)
+    
