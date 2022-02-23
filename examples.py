@@ -1408,3 +1408,16 @@ for deformer_node in deformers:
     deformer_type = cmds.objectType(deformer_node)
     print(deformer_node, deformer_type)
     
+
+   ####################################################################################################
+import maya.cmds as cmds
+curve_point_list = cmds.ls(selection=True, flatten=True)
+
+point_position_list = []
+for curve_point in curve_point_list:
+    point_position = cmds.pointPosition(curve_point)
+    point_position_list.append(point_position)
+    
+cmds.curve(p=point_position_list)
+    
+    
