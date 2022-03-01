@@ -1420,4 +1420,17 @@ for curve_point in curve_point_list:
     
 cmds.curve(p=point_position_list)
     
-    
+#########################################################################################################
+#rivet commands in python and mel
+
+import maya.mel as mel
+mel.eval('Rivet;')
+
+import maya.internal.nodes.uvpin.node_interface
+maya.internal.nodes.uvpin.node_interface.createRivet()
+
+#you can make it shorter for example:
+import maya.internal.nodes.uvpin.node_interface as xyz
+xyz.createRivet()
+
+#########################################################################################################
