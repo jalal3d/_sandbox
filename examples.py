@@ -1425,6 +1425,8 @@ cmds.curve(p=point_position_list)
 
 import maya.mel as mel
 mel.eval('Rivet;')
+#or small r because of maya2020
+mel.eval('rivet;') 
 
 import maya.internal.nodes.uvpin.node_interface
 maya.internal.nodes.uvpin.node_interface.createRivet()
